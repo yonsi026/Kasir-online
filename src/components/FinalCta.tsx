@@ -1,11 +1,13 @@
 import React from 'react';
 import { ArrowRight, ChevronRight } from 'lucide-react';
+import { PageId } from '../types';
 
 interface FinalCtaProps {
   onOpenDemo: () => void;
+  onNavigate?: (page: PageId) => void;
 }
 
-export const FinalCta: React.FC<FinalCtaProps> = ({ onOpenDemo }) => {
+export const FinalCta: React.FC<FinalCtaProps> = ({ onOpenDemo, onNavigate }) => {
   return (
     <section className="bg-[#081A33] text-white py-24 sm:py-32 border-b border-[#111827]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left">
@@ -31,13 +33,14 @@ export const FinalCta: React.FC<FinalCtaProps> = ({ onOpenDemo }) => {
               <ArrowRight className="w-5 h-5" />
             </button>
 
-            <a
-              href="#solusi"
-              className="border border-white/30 hover:border-white hover:bg-white/5 text-white font-semibold text-base px-8 py-4 transition-colors flex items-center justify-center gap-2"
+            <button
+              type="button"
+              onClick={() => onNavigate ? onNavigate('cara-kerja') : window.location.hash = 'cara-kerja'}
+              className="border border-white/30 hover:border-white hover:bg-white/5 text-white font-semibold text-base px-8 py-4 transition-colors flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>Lihat Cara Kerja</span>
               <ChevronRight className="w-4 h-4 text-[#FF7A00]" />
-            </a>
+            </button>
           </div>
 
           <div className="pt-10 border-t border-white/10 flex flex-wrap items-center gap-8 text-xs font-mono text-gray-400">
@@ -50,3 +53,4 @@ export const FinalCta: React.FC<FinalCtaProps> = ({ onOpenDemo }) => {
     </section>
   );
 };
+

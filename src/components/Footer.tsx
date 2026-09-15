@@ -1,6 +1,20 @@
 import React from 'react';
+import { PageId } from '../types';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onNavigate?: (page: PageId) => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+  const handlePageClick = (page: PageId, e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onNavigate) {
+      onNavigate(page);
+    } else {
+      window.location.hash = page;
+    }
+  };
+
   return (
     <footer className="bg-white border-t border-[#E5E7EB] pt-16 pb-12 text-[#111827]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -8,8 +22,11 @@ export const Footer: React.FC = () => {
           
           {/* Brand Info */}
           <div className="md:col-span-5 space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-[#FF7A00] flex-shrink-0" />
+            <div 
+              onClick={(e) => handlePageClick('beranda', e)}
+              className="flex items-center gap-2 cursor-pointer group inline-flex"
+            >
+              <div className="w-4 h-4 bg-[#FF7A00] flex-shrink-0 group-hover:scale-110 transition-transform" />
               <span className="font-extrabold text-2xl tracking-tight text-[#111827]">
                 KASIR ONLINE
               </span>
@@ -22,18 +39,60 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Links 1: Produk */}
+          {/* Links 1: Navigasi Halaman */}
           <div className="md:col-span-3 space-y-3">
             <h4 className="font-bold text-xs uppercase tracking-widest text-gray-400 font-mono">
-              Produk
+              Halaman Produk
             </h4>
             <ul className="space-y-2 text-sm font-medium text-gray-700">
-              <li><a href="#pos" className="hover:text-[#FF7A00] transition-colors">POS Terminal</a></li>
-              <li><a href="#fitur" className="hover:text-[#FF7A00] transition-colors">Inventory</a></li>
-              <li><a href="#fitur" className="hover:text-[#FF7A00] transition-colors">Penjualan</a></li>
-              <li><a href="#fitur" className="hover:text-[#FF7A00] transition-colors">Pembelian</a></li>
-              <li><a href="#solusi" className="hover:text-[#FF7A00] transition-colors">Akuntansi</a></li>
-              <li><a href="#laporan" className="hover:text-[#FF7A00] transition-colors">Laporan Bisnis</a></li>
+              <li>
+                <button 
+                  onClick={(e) => handlePageClick('produk', e)}
+                  className="hover:text-[#FF7A00] transition-colors cursor-pointer text-left"
+                >
+                  POS Terminal & Offline
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={(e) => handlePageClick('fitur', e)}
+                  className="hover:text-[#FF7A00] transition-colors cursor-pointer text-left"
+                >
+                  Fitur & Inventori
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={(e) => handlePageClick('cara-kerja', e)}
+                  className="hover:text-[#FF7A00] transition-colors cursor-pointer text-left"
+                >
+                  Cara Kerja & Akuntansi
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={(e) => handlePageClick('bisnis', e)}
+                  className="hover:text-[#FF7A00] transition-colors cursor-pointer text-left"
+                >
+                  Untuk Bisnis & Segmen
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={(e) => handlePageClick('laporan', e)}
+                  className="hover:text-[#FF7A00] transition-colors cursor-pointer text-left"
+                >
+                  Laporan Bisnis & Ekspor
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={(e) => handlePageClick('faq', e)}
+                  className="hover:text-[#FF7A00] transition-colors cursor-pointer text-left"
+                >
+                  Tanya Jawab & Bantuan
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -43,9 +102,30 @@ export const Footer: React.FC = () => {
               Perusahaan
             </h4>
             <ul className="space-y-2 text-sm font-medium text-gray-700">
-              <li><a href="#" className="hover:text-[#FF7A00] transition-colors">Tentang</a></li>
-              <li><a href="#" className="hover:text-[#FF7A00] transition-colors">Kontak</a></li>
-              <li><a href="#" className="hover:text-[#FF7A00] transition-colors">Bantuan</a></li>
+              <li>
+                <button 
+                  onClick={(e) => handlePageClick('beranda', e)}
+                  className="hover:text-[#FF7A00] transition-colors cursor-pointer text-left"
+                >
+                  Tentang Sistem
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={(e) => handlePageClick('faq', e)}
+                  className="hover:text-[#FF7A00] transition-colors cursor-pointer text-left"
+                >
+                  Pusat Bantuan
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={(e) => handlePageClick('bisnis', e)}
+                  className="hover:text-[#FF7A00] transition-colors cursor-pointer text-left"
+                >
+                  Standar Keamanan
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -55,8 +135,9 @@ export const Footer: React.FC = () => {
               Legal
             </h4>
             <ul className="space-y-2 text-sm font-medium text-gray-700">
-              <li><a href="#" className="hover:text-[#FF7A00] transition-colors">Kebijakan Privasi</a></li>
-              <li><a href="#" className="hover:text-[#FF7A00] transition-colors">Syarat & Ketentuan</a></li>
+              <li><span className="text-gray-500">Privasi Data Usaha</span></li>
+              <li><span className="text-gray-500">Syarat & Ketentuan</span></li>
+              <li><span className="text-gray-500">Isolasi Database</span></li>
             </ul>
           </div>
 

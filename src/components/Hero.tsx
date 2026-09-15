@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { ArrowRight, ShoppingCart, Package, DollarSign, TrendingUp, AlertTriangle, CheckCircle2, ChevronRight } from 'lucide-react';
+import { PageId } from '../types';
 
 interface HeroProps {
   onOpenDemo: () => void;
+  onNavigate?: (page: PageId) => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
+export const Hero: React.FC<HeroProps> = ({ onOpenDemo, onNavigate }) => {
   const [activeTab, setActiveTab] = useState<'overview' | 'pos' | 'inventory' | 'finance'>('overview');
 
   return (
@@ -37,13 +39,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
                 <ArrowRight className="w-4 h-4" />
               </button>
               
-              <a
-                href="#solusi"
-                className="border border-[#111827] hover:bg-[#F8FAFC] text-[#111827] font-semibold text-base px-6 py-3.5 transition-colors text-center flex items-center justify-center gap-2"
+              <button
+                type="button"
+                onClick={() => onNavigate ? onNavigate('cara-kerja') : window.location.hash = 'cara-kerja'}
+                className="border border-[#111827] hover:bg-[#F8FAFC] text-[#111827] font-semibold text-base px-6 py-3.5 transition-colors text-center flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>Lihat Cara Kerja</span>
                 <ChevronRight className="w-4 h-4 text-[#FF7A00]" />
-              </a>
+              </button>
             </div>
 
             <div className="pt-6 border-t border-[#E5E7EB] grid grid-cols-3 gap-4 text-xs font-semibold text-gray-600">

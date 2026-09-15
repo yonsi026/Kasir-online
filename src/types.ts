@@ -36,3 +36,5 @@ export interface FaqItem {
   question: string;
   answer: string;
 }
+
+export type PageId = 'beranda' | 'produk' | 'fitur' | 'cara-kerja' | 'bisnis' | 'laporan' | 'faq';
