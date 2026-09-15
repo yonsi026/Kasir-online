@@ -1,0 +1,6 @@
+{
+  "name": "Kasir Online",
+  "description": "Sistem kasir, stok, dan laporan keuangan terintegrasi untuk bisnis dan UMKM Indonesia.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
