@@ -13,8 +13,10 @@ import {
   RotateCcw
 } from 'lucide-react';
 import { CartItem } from '../types';
+import { ThermalReceiptModal } from './ThermalReceiptModal';
 
 export const PosSection: React.FC = () => {
+  const [isThermalModalOpen, setIsThermalModalOpen] = useState<boolean>(false);
   const catalog = [
     { id: '1', name: 'Indomie Goreng', price: 3000, category: 'Makanan Instan', stock: 48 },
     { id: '2', name: 'Aqua Botol 600ml', price: 4000, category: 'Minuman Dingin', stock: 24 },
@@ -351,20 +353,29 @@ export const PosSection: React.FC = () => {
                 <span>• Laporan Laba Rugi real-time terupdate</span>
               </div>
 
-              <div className="flex gap-2 pt-2">
+              <div className="space-y-2 pt-2">
                 <button
-                  onClick={resetOrder}
-                  className="flex-1 bg-[#111827] text-white py-2.5 font-bold text-xs flex items-center justify-center gap-1.5 hover:bg-black cursor-pointer"
+                  onClick={() => setIsThermalModalOpen(true)}
+                  className="w-full bg-[#FF7A00] text-white py-2.5 font-bold text-xs flex items-center justify-center gap-1.5 hover:bg-[#e66e00] cursor-pointer shadow-[2px_2px_0px_0px_#111827]"
                 >
-                  <RotateCcw className="w-3.5 h-3.5" />
-                  <span>Transaksi Baru</span>
+                  <Printer className="w-3.5 h-3.5" />
+                  <span>[ Cetak Struk Bluetooth Thermal 58/80mm ]</span>
                 </button>
-                <button
-                  onClick={() => setShowReceipt(false)}
-                  className="border border-[#111827] text-[#111827] px-4 py-2.5 font-bold text-xs hover:bg-gray-100 cursor-pointer"
-                >
-                  Tutup
-                </button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={resetOrder}
+                    className="flex-1 bg-[#111827] text-white py-2.5 font-bold text-xs flex items-center justify-center gap-1.5 hover:bg-black cursor-pointer"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5" />
+                    <span>Transaksi Baru</span>
+                  </button>
+                  <button
+                    onClick={() => setShowReceipt(false)}
+                    className="border border-[#111827] text-[#111827] px-4 py-2.5 font-bold text-xs hover:bg-gray-100 cursor-pointer"
+                  >
+                    Tutup
+                  </button>
+                </div>
               </div>
 
             </div>
@@ -372,6 +383,12 @@ export const PosSection: React.FC = () => {
         )}
 
       </div>
+
+      {/* Full Thermal & Bluetooth Print Modal */}
+      <ThermalReceiptModal
+        isOpen={isThermalModalOpen}
+        onClose={() => setIsThermalModalOpen(false)}
+      />
     </section>
   );
 };
